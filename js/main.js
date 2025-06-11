@@ -1,9 +1,9 @@
 const regions = [
-  { name: "Регион 1", switches: 6 },
-  { name: "Регион 2", switches: 4 },
-  { name: "Регион 3", switches: 8 },
-  { name: "Регион 4", switches: 5 },
-  { name: "Регион 5", switches: 7 },
+  { name: "Асака", switches: 6 },
+  { name: "Кон", switches: 4 },
+  { name: "Орзу", switches: 8 },
+  { name: "Маргилан", switches: 5 },
+  { name: "Кул", switches: 7 },
 ];
 
 function showRegion(index) {
