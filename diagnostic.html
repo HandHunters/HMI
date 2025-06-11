@@ -3,117 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <title>Диагностика</title>
-  <link rel="stylesheet" href="css/styles.css">
   <style>
-    body { background-color: #000; color: yellow; font-family: monospace; }
-    .section { border: 2px solid maroon; margin: 10px; padding: 10px; }
-    .title { background-color: maroon; color: yellow; font-weight: bold; text-align: center; padding: 5px; }
-    .controls, .errors { display: flex; flex-wrap: wrap; gap: 10px; }
-    .block { background: #222; border: 1px solid #555; padding: 10px; min-width: 150px; text-align: center; }
-    .button { display: inline-block; padding: 5px 10px; margin: 3px; color: white; font-weight: bold; cursor: pointer; }
-    .on { background-color: green; }
-    .off { background-color: red; }
-    .intermediate { color: #a18bd3; margin-top: 5px; font-size: 0.9em; }
-    .dot { height: 16px; width: 16px; background-color: #a18bd3; border-radius: 50%; display: inline-block; }
-    .row { display: flex; align-items: center; gap: 10px; margin: 5px 0; }
+    body {
+      background-color: black;
+      color: yellow;
+      font-family: sans-serif;
+    }
+    .block {
+      border: 2px solid red;
+      margin: 10px;
+    }
+    .title {
+      background-color: maroon;
+      text-align: center;
+      padding: 5px;
+      font-weight: bold;
+    }
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+    }
+    .item {
+      background-color: #333;
+      border: 1px solid grey;
+      padding: 10px;
+      margin: 5px;
+      min-width: 150px;
+      text-align: center;
+    }
+    .status {
+      color: violet;
+      font-weight: bold;
+    }
+    .button-on {
+      background-color: green;
+      color: black;
+      padding: 5px;
+      margin: 2px;
+    }
+    .button-off {
+      background-color: red;
+      color: black;
+      padding: 5px;
+      margin: 2px;
+    }
   </style>
 </head>
 <body>
-  <div class="section">
-    <div class="title">Освещение и Обогрев</div>
-    <div class="controls">
-      <!-- Разъединители N1–N6 -->
-      <div class="block">N1<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
-<div class="block">N2<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
-<div class="block">N3<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
-<div class="block">N4<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
-<div class="block">N5<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
-<div class="block">N6<br>
-  <div class="intermediate">Промежуточное</div>
-  <div>
-    <span class="button off">Отключить</span>
-    <span class="button on">Включить</span>
-  </div>
-</div>
 
+  <div class="block">
+    <div class="title">Освещение 1–6</div>
+    <div class="content">
+      <!-- Освещение N1–N6 -->
+      <div class="item">N1<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
+      <div class="item">N2<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
+      <div class="item">N3<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
+      <div class="item">N4<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
+      <div class="item">N5<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
+      <div class="item">N6<br><span class="status">Промежуточное</span><br>
+        <button class="button-off">Отключить</button>
+        <button class="button-on">Включить</button>
+      </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="title">UPS</div>
-    <div class="row"><span>UPS_Output_voltage_too_high</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Internal_fault</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Output_on_bypass</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Over_temperature</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Emergency_stop</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_overload</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_low_battery</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Battery_low_warning</span><span class="dot"></span></div>
-    <div class="row"><span>UPS_Unit_general_alarm</span><span class="dot"></span></div>
-  </div>
-
-  <div class="section">
+  <div class="block">
     <div class="title">DI ШУС</div>
-    <div class="controls">
-      <div class="block">ИБП - Блок питания<br><div class="intermediate">Промежуточное</div></div>
-      <div class="block">Моха U1 - ошибка<br><div class="intermediate">Промежуточное</div></div>
-      <div class="block">Температура<br><div class="intermediate">Промежуточное</div></div>
+    <div class="content">
+      <div class="item">ИБП – Блок питания<br><span class="status">Промежуточное</span></div>
+      <div class="item">ИБП – Работа от батареи<br><span class="status">Промежуточное</span></div>
+      <div class="item">Moxa U1 – ошибка<br><span class="status">Промежуточное</span></div>
+      <div class="item">Moxa U2 – ошибка<br><span class="status">Промежуточное</span></div>
+      <div class="item">QF1<br><span class="status">Промежуточное</span></div>
+      <div class="item">Вентилятор<br><span class="status">Промежуточное</span></div>
+      <div class="item">Температура<br><span class="status">Промежуточное</span></div>
+      <div class="item">Дверь<br><span class="status">Промежуточное</span></div>
+      <div class="item">PLC в работе<br><span class="status">Промежуточное</span></div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="block">
     <div class="title">Аварийное сообщение ПЛК</div>
-    <div class="controls">
-      <div class="block">E1<br><div class="intermediate">Промежуточное</div></div>
-      <div class="block">E2<br><div class="intermediate">Промежуточное</div></div>
-      <div class="block">E3<br><div class="intermediate">Промежуточное</div></div>
-      <div class="block">E4<br><div class="intermediate">Промежуточное</div></div>
+    <div class="content">
+      <div class="item">E1<br><span class="status">Промежуточное</span></div>
+      <div class="item">E2<br><span class="status">Промежуточное</span></div>
+      <div class="item">E3<br><span class="status">Промежуточное</span></div>
+      <div class="item">E4<br><span class="status">Промежуточное</span></div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="block">
     <div class="title">ШЭП</div>
-    <div class="row"><span>Фидер – 1</span><span class="dot"></span></div>
-    <div class="row"><span>QF1</span><span class="dot"></span></div>
-    <div class="row"><span>Линия 1 – 220В</span><span class="dot"></span></div>
-  </div>
-
-  <div class="section">
-    <div class="title">Ошибки и двери</div>
-    <div class="errors">
-      <div class="block">Oshibka_Moxa_B1_BUK_A<br><span class="intermediate">Ошибка</span></div>
-      <div class="block">Dver_…_zakrita<br><span class="intermediate">Ошибка</span></div>
+    <div class="content">
+      <div class="item">Фидер – 1 ●</div>
+      <div class="item">QF1 ●</div>
+      <div class="item">QF7 ●</div>
+      <div class="item">QF8 ●</div>
+      <div class="item">Линия 1 – 220В ●</div>
+      <div class="item">Линия 2 – 220В ●</div>
     </div>
   </div>
+
+  <div class="block">
+    <div class="title">Ошибки и двери</div>
+    <div class="content">
+      <div class="item">Oshibka_Moxa_B1_BUK_A<br><span class="status">Ошибка</span></div>
+      <div class="item">Oshibka_Moxa_B1_BUK_ZT2_RT2<br><span class="status">Ошибка</span></div>
+      <div class="item">Oshibka_Moxa_B1_BUK_B<br><span class="status">Ошибка</span></div>
+      <div class="item">Oshibka_Moxa_B1_BUK_N1_N2<br><span class="status">Ошибка</span></div>
+      <div class="item">Dver_BUK_A_zakrita<br><span class="status">Ошибка</span></div>
+      <div class="item">Dver_BUK_ZT2_RT2_zakrita<br><span class="status">Ошибка</span></div>
+      <div class="item">Dver_BUK_B_zakrita<br><span class="status">Ошибка</span></div>
+      <div class="item">Dver_BUK_N1_N2_zakrita<br><span class="status">Ошибка</span></div>
+    </div>
+  </div>
+
 </body>
 </html>
