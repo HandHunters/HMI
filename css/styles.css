@@ -1,0 +1,23 @@
+body {
+  background-color: #111;
+  color: white;
+  font-family: sans-serif;
+}
+.login-container {
+  text-align: center;
+  padding-top: 100px;
+}
+input, button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+}
+button {
+  font-weight: bold;
+}
+.active {
+  background-color: green;
+}
+.inactive {
+  background-color: red;
+}
