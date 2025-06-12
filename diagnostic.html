@@ -1,117 +1,94 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Диагностика</title>
   <style>
     body {
       background-color: black;
       color: yellow;
-      font-family: Arial, sans-serif;
-      padding: 20px;
+      font-family: sans-serif;
     }
-    .section {
+    .block {
       border: 2px solid #00B7EB;
-      margin-bottom: 20px;
-      padding: 10px;
-      background-color: #2b0000;
+      margin: 10px;
     }
-    .section-title {
+    .title {
+      background-color: #00B7EB;
       text-align: center;
-      margin-bottom: 10px;
+      padding: 5px;
       font-weight: bold;
     }
-    .light-control {
+    .content {
       display: flex;
-      align-items: center;
-      margin-bottom: 5px;
+      flex-wrap: wrap;
+      padding: 10px;
     }
-    .light-control span {
-      width: 80px;
+    .item {
+      background-color: #333;
+      border: 1px solid grey;
+      padding: 10px;
+      margin: 5px;
+      min-width: 150px;
+      text-align: center;
     }
-    .state {
-      margin-left: 10px;
+    .status {
+      color: violet;
       font-weight: bold;
     }
-    .btn {
-      margin-left: 5px;
-      padding: 5px 10px;
-      border: none;
-      cursor: pointer;
-    }
-    .on {
+    .button-on {
       background-color: green;
-      color: white;
+      color: black;
+      padding: 5px;
+      margin: 2px;
     }
-    .off {
-      background-color: darkred;
-      color: white;
+    .button-off {
+      background-color: red;
+      color: black;
+      padding: 5px;
+      margin: 2px;
     }
-    .inactive {
+    .disabled {
       background-color: gray !important;
-      cursor: default;
+      color: white !important;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div class="section">
-    <div class="section-title">Освещение 1–6</div>
-    <div class="light-control" id="light1">
-      <span>N1:</span>
-      <button class="btn on" onclick="toggleLight(1, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(1, false)">Выключить</button>
-      <span class="state" id="state1">Отключено</span>
-    </div>
-    <div class="light-control" id="light2">
-      <span>N2:</span>
-      <button class="btn on" onclick="toggleLight(2, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(2, false)">Выключить</button>
-      <span class="state" id="state2">Отключено</span>
-    </div>
-    <div class="light-control" id="light3">
-      <span>N3:</span>
-      <button class="btn on" onclick="toggleLight(3, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(3, false)">Выключить</button>
-      <span class="state" id="state3">Отключено</span>
-    </div>
-    <div class="light-control" id="light4">
-      <span>N4:</span>
-      <button class="btn on" onclick="toggleLight(4, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(4, false)">Выключить</button>
-      <span class="state" id="state4">Отключено</span>
-    </div>
-    <div class="light-control" id="light5">
-      <span>N5:</span>
-      <button class="btn on" onclick="toggleLight(5, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(5, false)">Выключить</button>
-      <span class="state" id="state5">Отключено</span>
-    </div>
-    <div class="light-control" id="light6">
-      <span>N6:</span>
-      <button class="btn on" onclick="toggleLight(6, true)">Включить</button>
-      <button class="btn off" onclick="toggleLight(6, false)">Выключить</button>
-      <span class="state" id="state6">Отключено</span>
+  <div class="block">
+    <div class="title">Освещение 1–6</div>
+    <div class="content" id="lights">
+      <!-- Генерируется скриптом -->
     </div>
   </div>
 
   <script>
-    function toggleLight(num, isOn) {
-      const stateEl = document.getElementById(`state${num}`);
-      const container = document.getElementById(`light${num}`);
-      const onBtn = container.querySelector(".btn.on");
-      const offBtn = container.querySelector(".btn.off");
+    const lights = ["N1", "N2", "N3", "N4", "N5", "N6"];
 
-      stateEl.textContent = isOn ? 'Включено' : 'Отключено';
-      stateEl.style.color = isOn ? 'lightgreen' : 'red';
+    lights.forEach((name, index) => {
+      const i = index + 1;
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.innerHTML = `
+        ${name}<br>
+        <span class="status" id="state${i}">Отключено</span><br>
+        <button id="off${i}" class="button-off disabled" onclick="toggle(${i}, false)">Отключить</button>
+        <button id="on${i}" class="button-on" onclick="toggle(${i}, true)">Включить</button>
+      `;
+      document.getElementById('lights').appendChild(div);
+    });
 
-      if (isOn) {
-        onBtn.classList.add("inactive");
-        offBtn.classList.remove("inactive");
-      } else {
-        offBtn.classList.add("inactive");
-        onBtn.classList.remove("inactive");
-      }
+    function toggle(num, isOn) {
+      document.getElementById(`state${num}`).textContent = isOn ? 'Включено' : 'Отключено';
+      document.getElementById(`state${num}`).style.color = isOn ? 'lightgreen' : 'red';
+
+      document.getElementById(`on${num}`).classList.toggle('disabled', isOn);
+      document.getElementById(`off${num}`).classList.toggle('disabled', !isOn);
     }
   </script>
+
+  <!-- Остальной код (DI ШУС, ПЛК, ШЭП, Ошибки) можно оставить без изменений -->
+
 </body>
 </html>
