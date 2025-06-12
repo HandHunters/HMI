@@ -1,26 +1,137 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>АРМ Оператора — Панель</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <title>АРМ Оператора — Dashboard</title>
+  <style>
+    body {
+      background-color: black;
+      color: yellow;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .block {
+      border: 2px solid #00B7EB;
+      margin: 10px;
+      padding: 10px;
+      background-color: #2b0000;
+    }
+    .title {
+      text-align: center;
+      font-weight: bold;
+      background-color: #00B7EB;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    .region-select {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .region-select button {
+      padding: 10px;
+      background-color: #003c50;
+      color: yellow;
+      border: 1px solid #00B7EB;
+      cursor: pointer;
+    }
+    .region-select button.active {
+      background-color: #00B7EB;
+      color: black;
+      font-weight: bold;
+    }
+    .disconnector {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+    .disconnector span {
+      width: 80px;
+    }
+    .btn {
+      margin-left: 10px;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+    .on {
+      background-color: green;
+    }
+    .off {
+      background-color: red;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <nav>
-      <button onclick="showRegion(0)">Асака</button>
-      <button onclick="showRegion(1)">Кон</button>
-      <button onclick="showRegion(2)">Орзу</button>
-      <button onclick="showRegion(3)">Маргилан</button>
-      <button onclick="showRegion(4)">Кул</button>
-      <a href="diagnostic.html">Диагностика</a>
-    </nav>
-  </header>
+  <div class="block">
+    <div class="title">Выбор региона</div>
+    <div class="region-select">
+      <button onclick="selectRegion(1)" id="region1">Регион 1</button>
+      <button onclick="selectRegion(2)" id="region2">Регион 2</button>
+      <button onclick="selectRegion(3)" id="region3">Регион 3</button>
+      <button onclick="selectRegion(4)" id="region4">Регион 4</button>
+      <button onclick="selectRegion(5)" id="region5">Регион 5</button>
+    </div>
+  </div>
 
-  <main>
-    <section id="regions"></section>
-  </main>
+  <div class="block">
+    <div class="title" id="region-title">Регион 1</div>
+    <div id="disconnectors"></div>
+  </div>
 
-  <script src="js/main.js"></script>
+  <script>
+    const disconnectorCount = 6;
+    let currentRegion = 1;
+
+    function loadState(region) {
+      const data = localStorage.getItem('region_' + region);
+      return data ? JSON.parse(data) : Array(disconnectorCount).fill(false);
+    }
+
+    function saveState(region, state) {
+      localStorage.setItem('region_' + region, JSON.stringify(state));
+    }
+
+    function toggleDisconnector(index) {
+      const state = loadState(currentRegion);
+      state[index] = !state[index];
+      saveState(currentRegion, state);
+      renderDisconnectors();
+    }
+
+    function renderDisconnectors() {
+      const container = document.getElementById('disconnectors');
+      container.innerHTML = '';
+      const state = loadState(currentRegion);
+
+      for (let i = 0; i < disconnectorCount; i++) {
+        const div = document.createElement('div');
+        div.className = 'disconnector';
+        div.innerHTML = `
+          <span>Разъединитель ${i + 1}</span>
+          <button class="btn ${state[i] ? 'on' : 'off'}" onclick="toggleDisconnector(${i})">
+            ${state[i] ? 'Включено' : 'Отключено'}
+          </button>
+        `;
+        container.appendChild(div);
+      }
+
+      document.getElementById('region-title').textContent = 'Регион ' + currentRegion;
+
+      for (let r = 1; r <= 5; r++) {
+        document.getElementById('region' + r).classList.remove('active');
+      }
+      document.getElementById('region' + currentRegion).classList.add('active');
+    }
+
+    function selectRegion(region) {
+      currentRegion = region;
+      renderDisconnectors();
+    }
+
+    renderDisconnectors();
+  </script>
 </body>
 </html>
